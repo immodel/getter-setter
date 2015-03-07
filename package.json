@@ -1,5 +1,5 @@
 {
-  "name": "getter-setter",
+  "name": "immodel-getter-setter",
   "version": "0.1.0",
   "description": "Add getters and setters to immodel",
   "main": "index.js",
