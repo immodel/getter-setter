@@ -20,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/immodel/getter-setter/issues"
   },
-  "homepage": "https://github.com/immodel/getter-setter"
+  "homepage": "https://github.com/immodel/getter-setter",
+  "dependencies": {}
 }

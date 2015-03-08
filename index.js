@@ -1,20 +1,20 @@
-module.exports = function(model) {
-  model.getters = model.getters || [];
-  model.setters = model.setters || [];
+module.exports = function() {
+  this.getters = [];
+  this.setters = [];
   
-  model.set = function(fn) {
-    return this.use(function(opts) {
-      opts.setters.push(fn);
+  this.set = function(fn) {
+    return this.use(function() {
+      this.setters.push(fn);
     });    
   };
    
-  model.get = function(fn) {
-    return this.use(function(opts) {
-      opts.getters.push(fn);
+  this.get = function(fn) {
+    return this.use(function() {
+      this.getters.push(fn);
     });
   };
   
-  model.runSetters = function(value, context) {
+  this.runSetters = function(value, context) {
     var self = this;
     this.setters.forEach(function(fn) {
       value = fn.call(context, value, self);
@@ -23,7 +23,7 @@ module.exports = function(model) {
     return value;
   };
 
-  model.runGetters = function(value, context) {
+  this.runGetters = function(value, context) {
     var self = this;
     this.getters.forEach(function(fn) {
       value = fn.call(context, value, self);
