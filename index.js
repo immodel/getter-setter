@@ -1,34 +1,29 @@
 module.exports = function() {
   this.getters = [];
-  this.setters = [];
-  
-  this.set = function(fn) {
-    return this.use(function() {
-      this.setters.push(fn);
-    });    
-  };
-   
+
   this.get = function(fn) {
     return this.use(function() {
       this.getters.push(fn);
     });
   };
-  
-  this.runSetters = function(value, context) {
-    var self = this;
+
+  this.runSetters = function(doc) {
     this.setters.forEach(function(fn) {
-      value = fn.call(context, value, self);
+      value = fn.call(doc);
     });
-    
+
+    this.setters.reduce(function(fn) {
+      return fn.call(memo);
+    })
+
     return value;
   };
 
-  this.runGetters = function(value, context) {
-    var self = this;
+  this.runGetters = function(doc) {
     this.getters.forEach(function(fn) {
-      value = fn.call(context, value, self);
+      value = fn.call(doc);
     });
-    
+
     return value;
   };
 };
